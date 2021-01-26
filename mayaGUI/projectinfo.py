@@ -7,14 +7,15 @@ import re
 from ..library import utilsLib
 from ..shelf import alembic
 
-PROJECTS_FOLDER = "E:/Files/3D/"
+# PROJECTS_FOLDER = "E:/Files/3D/"
 
-
-os.getcwd()
+full_path = __file__
+threeD_FOLDER = full_path.split("3D")[0]+"3D/"
+PROJECTS_FOLDER = threeD_FOLDER + "projects/"
 
 def get_project_path():
-    PROJECTS_FOLDER = "E:/Files/3D/"
-    return PROJECTS_FOLDER
+    pf = threeD_FOLDER
+    return pf
 
 def project_info(project, asset, step=""):
     current_project = project
@@ -54,7 +55,7 @@ def project_info(project, asset, step=""):
         project_dict["blendShapes"] = project_dict["data"] + "blendShapes/"
         project_dict["extraGeo"] = project_dict["data"] + "extraGeo/"
 
-        project_dict["guides"] = PROJECTS_FOLDER+"_Resources/Scripts/pup/assets/guides/"
+        project_dict["guides"] = threeD_FOLDER+"_puprepo/pup/assets/guides/"
 
 
     # =========== MODEL

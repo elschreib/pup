@@ -117,8 +117,11 @@ class TextureWidget(generictab.GenericWidget):
 
     def texture_files(self):
         self.textureFiles_cmb.clear()
-        utilsLib.check_create_dir(self.project_dict["painter_scene"])
-        self.textureFiles_cmb.addItems(os.listdir(self.project_dict["painter_scene"]))
+        if os.path.isdir(self.project_dict["painter_scene"]):
+            files = os.listdir(self.project_dict["painter_scene"])[::-1]
+        else:
+            files="None"
+        self.textureFiles_cmb.addItems(files)
 
 
 
@@ -127,8 +130,13 @@ class TextureWidget(generictab.GenericWidget):
     # ================================================ SHADER FUNCTIONS ================================================
     def texture_nodes(self):
         self.textureNodes_cmb.clear()
-        utilsLib.check_create_dir(self.project_dict["painter_export"])
-        self.textureNodes_cmb.addItems(os.listdir(self.project_dict["painter_export"]))
+        if os.path.isdir(self.project_dict["painter_export"]):
+            files = os.listdir(self.project_dict["painter_export"])[::-1]
+        else:
+            files="None"
+        print files
+        self.textureNodes_cmb.addItems(files)
+
 
     def create_shader(self):
 
@@ -189,6 +197,7 @@ class TextureWidget(generictab.GenericWidget):
 
         else:
             return ["None"]
+
 
     def get_all_versions(self, path, excludes=[".tx"], search_for=""):
         # get all versions using wildcard

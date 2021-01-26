@@ -63,7 +63,7 @@ def version_up_path(folder_path, wild_card):
         print_error("No file found at PATH = {0} WILDCARD = {1}".format(folder_path, wild_card))
 
 
-def version_by_integer(folder_path, wild_card, integer):
+def version_by_integer(folder_path, wild_card, integer, endswith=None):
 
     """
     versions up a file path eg. e:/path/to/folde/my_maya_v001.ma = my_maya_v002.ma
@@ -97,7 +97,7 @@ def version_by_integer(folder_path, wild_card, integer):
         return new_path
 
     else:
-        print_error("No file found at PATH = {0} WILDCARD = {1}".format(folder_path, wild_card))
+        print_warning("No file found at PATH = {0}           WILDCARD = {1}".format(folder_path, wild_card))
 
 
 def get_history(node=None, historyType=None):
@@ -194,15 +194,17 @@ def remove_items_with(list):
             newList.append(i)
     return newList
 
-def print_it(name):
+def print_it(string):
     print "*"*90
-    print name
+    print string
     print "*"*90
 
-def print_error(name):
-    print "="*90
-    print "ERROR message: "+name
-    print "="*90
+def print_error(string):
+    cmds.error(string)
+
+
+def print_warning(string):
+    cmds.warning(string)
 
 
 def saveJson(my_data,path,version=0):

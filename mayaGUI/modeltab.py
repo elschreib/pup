@@ -44,14 +44,12 @@ class ModelWidget(generictab.GenericWidget):
         # self.sculptFiles_cmb.addItems(os.listdir(self.project_dict["sculpt_scene"]))
         self.sculptFilesOpen_btn = QtWidgets.QPushButton("Open")
         self.sculptFilesOpen_btn.setStyleSheet("padding: 0px;")
-        self.apex_btn = QtWidgets.QPushButton("Apex")
 
 
     def create_layout(self):
         sculptExport_layout = QtWidgets.QHBoxLayout()
         sculptExport_layout.addWidget(self.sculpt_lst)
         self.sculpt_exports()
-        # self.sculpt_lst.setSizePolicy(QSizePolicy=[0,10])
 
         sculptExport_layout2 = QtWidgets.QVBoxLayout()
         sculptExport_layout2.addWidget(self.sculptImport_btn)
@@ -62,16 +60,12 @@ class ModelWidget(generictab.GenericWidget):
 
         sculptExport_layout.addLayout(sculptExport_layout2)
 
-        # sculptExport_formLayout = QtWidgets.QFormLayout()
-        # sculptExport_formLayout.addRow("Exports:", sculptExport_layout)
-
         sep1 = QtWidgets.QHBoxLayout()
         self.add_separator(sep1)
 
         sculptScene_layout = QtWidgets.QHBoxLayout()
         sculptScene_layout.addWidget(self.sculptFiles_cmb)
         sculptScene_layout.addWidget(self.sculptFilesOpen_btn)
-        sculptScene_layout.addWidget(self.apex_btn)
         sculptScene_formLayout = QtWidgets.QFormLayout()
         sculptScene_formLayout.addRow("File:", sculptScene_layout)
 
@@ -91,21 +85,19 @@ class ModelWidget(generictab.GenericWidget):
         self.sculptRefresh_btn.clicked.connect(self.sculpt_exports)
 
         self.sculptFilesOpen_btn.clicked.connect(self.open_file)
-        self.apex_btn.clicked.connect(self.open_apex)
 
     def open_file(self):
         selected_file = self.sculptFiles_cmb.currentText()
         path = self.project_dict["sculpt_scene"]+selected_file
         os.startfile(path)
 
-    def open_apex(self):
-        path="E:/Program Files/origin/originGames/Apex/r5apex.exe"
-        os.startfile(path)
-
     def sculpt_files(self):
         self.sculptFiles_cmb.clear()
-        utilsLib.check_create_dir(self.project_dict["sculpt_scene"])
-        files = os.listdir(self.project_dict["sculpt_scene"])[::-1]
+        # utilsLib.check_create_dir(self.project_dict["sculpt_scene"])
+        if os.path.isdir(self.project_dict["sculpt_scene"]):
+            files = os.listdir(self.project_dict["sculpt_scene"])[::-1]
+        else:
+            files="None"
         self.sculptFiles_cmb.addItems(files)
 
     def refresh_widgets(self):
@@ -115,8 +107,10 @@ class ModelWidget(generictab.GenericWidget):
 
     def sculpt_exports(self):
         self.sculpt_lst.clear()
-        utilsLib.check_create_dir(self.project_dict["sculpt_export"])
-        items = os.listdir(self.project_dict["sculpt_export"])
+        if os.path.isdir(self.project_dict["sculpt_export"]):
+            items = os.listdir(self.project_dict["sculpt_export"])
+        else:
+            items = ["None"]
         for item in items:
             self.sculpt_lst.addItem(item)
 
@@ -125,22 +119,23 @@ class ModelWidget(generictab.GenericWidget):
         self.item = (self.sculpt_lst.selectedItems())[0].text()
         cmds.file(self.project_dict["sculpt_export"]+self.item, i=True, ignoreVersion=True)
 
+
     def sculptBtn_export(self):
         objects = cmds.ls(selection=True)
         for object in objects:
             save_obj(object, str(self.project_dict["sculpt_export"]+object))
         self.refresh_widgets()
 
+
     def sculpt_reference(self):
         self.item = (self.sculpt_lst.selectedItems())[0].text()
         generictab.load_referenced(self.project_dict["sculpt_export"]+self.item)
 
+
     def sculpt_delete(self):
         self.item = (self.sculpt_lst.selectedItems())[0].text()
-
         os.remove(self.project_dict["sculpt_export"]+self.item)
         self.refresh_widgets()
-
         utilsLib.print_it("DELETED ---{0}--- from {1}".format(self.item, self.project_dict["sculpt_export"]))
 
 
