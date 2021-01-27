@@ -134,6 +134,11 @@ def get_history(node=None, historyType=None):
 
 
 def guide_namespaces():
+    """
+    get all namespaces for guides and return only parts for python builds
+    requires two "_" so its side_name_pythonPart
+    :return:
+    """
     scene_ns = cmds.namespaceInfo(listOnlyNamespaces=True, recurse=True)
 
     # guide_ns_dict = {}

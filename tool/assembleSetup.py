@@ -113,23 +113,26 @@ class AssembleSetup(object):
 
 
     def build_guides(self):
-
+        # get guide prefixs and python parts
         self.prefixs, self.part_ns = utilsLib.guide_namespaces()
 
         print "BUILDING PARTS:"
         print self.prefixs, self.part_ns
         print data.asset_name
 
+        # basic rig scene setup - rig_GRP etc..
         self.sceneSetup()
 
         ns_list = self.part_ns
         prefixs_list = self.prefixs
         self.parts = []
+        # builds parts if there otherwise removes from list and prints warning
         for ns, prefix in zip(ns_list, prefixs_list):
-            print "PART:"
-            print ns.lower()
+            print "PART:     "+ns.lower()
+            # create module path
             module_path = "pup.assets.parts.{0}.{1}".format(ns.lower(), ns)
             components = module_path.split('.')
+            # mod = pup
             mod = __import__(components[0])
 
             pass_check = 0
@@ -143,7 +146,9 @@ class AssembleSetup(object):
             if pass_check == 1:
                 guide_check = pm.ls("{0}_{1}:guide".format(prefix, ns))
                 if guide_check:
-                    part = mod()
+                    side = prefix.split("_")[0]
+                    name = prefix.split("_")[-1]
+                    part = mod(side, name, ns)
                     part.build_guides(prefix)
                     self.parts.append(part)
                 else:
@@ -160,16 +165,24 @@ class AssembleSetup(object):
         for ns, prefix, part in zip(self.part_ns, self.prefixs, self.parts):
             self.connect_parts(part)
             # CONNECT PART IN
-
+            guide_node = prefix+"_"+ns+":"+"guide"
             # connect part part_in to assigned input
-            if pm.attributeQuery("part_input", node=prefix+"_"+ns+":"+"guide", exists=True):
-                connector = pm.getAttr(prefix+"_"+ns+":"+"guide.part_input")
-                constraint_check = cmds.ls(connector)
-                if constraint_check:
-                    pm.parentConstraint(connector, part.part_in, mo=True)
-                    pm.scaleConstraint(connector, part.part_in, mo=True)
+            # TODO: rewrite parts to allow the input to = node and output to = node
+            print part.part_dict
+            guide_dict = coreLib.get_guideAttr_dict(guide_node)
 
-            attrs_dict = coreLib.get_partGRP_connects(prefix+"_"+ns+":"+"guide")
+
+            for key in guide_dict.keys():
+                if key == "inputs":
+                    for input_key in guide_dict[key].keys():
+                        connector = pm.getAttr(guide_node+input_key)
+                        constraint_check = cmds.ls(connector)
+                        if constraint_check:
+                            pm.parentConstraint(connector, part.part_in, mo=True)
+                            pm.scaleConstraint(connector, part.part_in, mo=True)
+                        else:
+                            utilsLib.print_error("NO INPUT FOR: {0} ----- attr:{1}".format(guide_node, input_key))
+            attrs_dict = coreLib.get_partGRP_connects(guide_node)
             print attrs_dict
             if attrs_dict:
                 for key in attrs_dict.keys():
@@ -202,7 +215,6 @@ class AssembleSetup(object):
         """
 
         [pm.connectAttr(self.reference_JNT+"."+axis, part.rootspace_GRP+"."+axis) for axis in "translate","rotate","scale"]
-        # pm.scaleConstraint(self.reference_JNT, part.rootspace_GRP)
 
         part.pack_GRP.setParent(self.rig_parts_GRP)
         [pm.connectAttr(self.reference_JNT+"."+axis, part.global_in+"."+axis) for axis in ["translate", "rotate", "scale"]]
@@ -214,7 +226,6 @@ class AssembleSetup(object):
 
 
 
-        "part_input"
 
 
     def clean_up(self):

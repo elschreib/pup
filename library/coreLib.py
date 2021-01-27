@@ -14,6 +14,68 @@ LIBRARY OF CORE FUNCTIONS NOT NEEDED IN NORMAL PART BUILD
 
 """
 
+
+
+def get_guideAttr_dict(guide):
+
+    guide_dict = {}
+    attrs = cmds.listAttr(guide, ud=True)
+
+    # possible keys:
+    inputs = None
+    follows = None
+
+    for attr in attrs:
+        print attr
+        if "_input" in attrs:
+            print "THERES AN INPUT IN ATTR"
+            if "inputs" not in guide_dict.keys():
+                print "CREATING INPUT"
+                guide_dict["inputs"] = {}
+            if "inputs" in guide_dict.keys():
+                guide_dict["inputs"][attr] = cmds.getAttr(guide + "." + attr)
+
+
+    #         inputs = True
+    #     if "_follow" in attrs:
+    #         follows = True
+    #
+    # if inputs:
+    #     guide_dict["inputs"] = {}
+    # if follows:
+    #     guide_dict["follows"] = {}
+    #
+    # for attr in attrs:
+    #     if attr.endswith("_input"):
+    #         guide_dict["inputs"][attr]=cmds.getAttr(guide+"."+attr)
+
+    print guide_dict
+
+
+
+    return guide_dict
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # ============================= FOLLOW GROUPS
 def get_partGRP_follows(node):
 

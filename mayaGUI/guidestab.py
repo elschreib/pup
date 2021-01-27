@@ -216,6 +216,8 @@ class GuidesWidget(generictab.GenericWidget):
         guide_node = guide+":guide"
         guide_dict = self.get_guide_dict(guide_node)
 
+        cmds.select(guide_node)
+
         if self.widgets:
             self.delete(self.widgets)
             self.widgets = []

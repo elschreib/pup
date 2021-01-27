@@ -8,92 +8,30 @@ from ..library import coreLib
 
 class PartSetup(object):
 
-    def __init__(self):
-        self.guide_ns = "testGuide"
-        self.prefix = "testPrefix"
-        self.guides_path = "path"
+    def __init__(self, side, name, part_name):
+        self.side = side
+        self.name = name
+        self.part_name = part_name
+        self.side_name = self.side+"_"+self.name
+        self.namespace = self.side_name+"_"+self.part_name
 
-    def packSetup(self, prefix):
-        if prefix and not prefix.endswith("_"):
-            prefix += "_"
-
-        self.pack_GRP = pm.group(em=1,name=prefix+"pack_GRP")
-        self.pack_GRP.addAttr("primary_vis",at="long",min=0,max=1,dv=1)
-        self.pack_GRP.primary_vis.set(cb=True)
-        self.pack_GRP.addAttr("internal_vis",at="long",min=0,max=1,dv=0)
-        self.pack_GRP.internal_vis.set(cb=True)
-        self.pack_GRP.addAttr("bindJoint_vis",at="long",min=0,max=1,dv=0)
-        self.pack_GRP.bindJoint_vis.set(cb=True)
-
-
-        if hasattr(self,"static_GRP"):
-            self.static_GRP = self.static_GRP
-        else:
-            self.static_GRP = pm.group(em=1,name=prefix+"static_GRP")
-
-        self.static_GRP.inheritsTransform.set(0)
-        # pm.connectAttr(self.pack_GRP.internal_vis, self.static_GRP.visibility)
-
-        self.rootspace_GRP = pm.group(em=1,name=prefix+"rootspace_GRP")
-
-        self.part_in = pm.group(em=1,name=prefix+"part_in", p=self.rootspace_GRP)
-        self.part_out = pm.group(em=1,name=prefix+"part_out", p=self.rootspace_GRP)
-
-        self.global_in = pm.spaceLocator(name=prefix+"global_in")
-        self.global_in.v.set(False)
-        self.global_in.setParent(self.static_GRP)
-
-        # PARENT
-        pm.parent(self.rootspace_GRP,self.static_GRP, self.pack_GRP)
-
-        # ATTRIBUTES
-        attributesLib.lock_and_hide([self.pack_GRP, self.static_GRP],t=True, r=True, s=True, v=False)
-        self.bindjoints_SEL = pm.sets(em=1,name=prefix+"bindjoints_SEL")
-        self.control_SEL = pm.sets(em=1,name=prefix+"control_SEL")
-
-        self.pack_GRPs = [self.pack_GRP, self.rootspace_GRP, self.static_GRP]
-
-
-        rig_parts_GRP = pm.ls("rig_parts_GRP")
-        reference_JNT = pm.ls("reference_JNT")
-
-
-
-    def get_part_info(self, prefix, ns):
-
-
-        self.follow_dict = coreLib.get_partGRP_follows("{0}_{1}:guide".format(prefix, ns))
-
-        if self.follow_dict:
-            self.group_in = coreLib.follow_groups(prefix, self.follow_dict)
-
-            for grp_in in self.group_in:
-                # pm.scaleConstraint(self.global_in, grp_in)
-                grp_in.setParent(self.pack_GRPs[-1])
-
-
-
-
-    # def fetchGuide(self):
-    #     cmds.file(new=True, f=True)
-    #     print self.guides_path
-    #     cmds.file(self.guides_path, i=True)
+        self.part_dict = {}
 
     def build_guides(self, prefix):
 
         print " "
         print " "
-        print "BUILDING PART --------- {0} {1}".format(prefix, self.guide_ns)
+        print "BUILDING PART --------- {0} {1}".format(prefix, self.part_name)
         print " "
         print " "
 
 
         self.prefix = prefix
 
-        self.packSetup(self.prefix)
+        self.packSetup()
 
-        self.get_part_info(self.prefix, self.guide_ns)
-        self.build_part(self.prefix)
+        # self.get_part_info(self.prefix, self.part_name)
+        self.build_part()
 
         # connect joints
         bindJoints = []
@@ -105,4 +43,87 @@ class PartSetup(object):
             [pm.connectAttr(self.pack_GRP.internal_vis, x + ".visibility") for x in none_bind]
 
         # attributesLib.drawing_override(nodes=[self.model_GRP], overrideType='reference', control=self.C_visibility_CTL)
+
+    # def register_part(self):
+    #     self.part_dict = {}
+
+    def packSetup(self):
+        # if prefix and not prefix.endswith("_"):
+        #     prefix += "_"
+
+        self.pack_GRP = pm.group(em=1, name=self.side_name + "pack_GRP")
+        self.pack_GRP.addAttr("primary_vis", at="long", min=0, max=1, dv=1)
+        self.pack_GRP.primary_vis.set(cb=True)
+        self.pack_GRP.addAttr("internal_vis", at="long", min=0, max=1, dv=0)
+        self.pack_GRP.internal_vis.set(cb=True)
+        self.pack_GRP.addAttr("bindJoint_vis", at="long", min=0, max=1, dv=0)
+        self.pack_GRP.bindJoint_vis.set(cb=True)
+
+        if hasattr(self, "static_GRP"):
+            self.static_GRP = self.static_GRP
+        else:
+            self.static_GRP = pm.group(em=1, name=self.side_name + "_static_GRP")
+
+        self.static_GRP.inheritsTransform.set(0)
+        # pm.connectAttr(self.pack_GRP.internal_vis, self.static_GRP.visibility)
+
+        self.rootspace_GRP = pm.group(em=1, name=self.side_name + "_rootspace_GRP")
+
+        self.part_in = pm.group(em=1, name=self.side_name + "_part_in", p=self.rootspace_GRP)
+        self.part_out = pm.group(em=1, name=self.side_name + "_part_out", p=self.rootspace_GRP)
+
+        self.global_in = pm.spaceLocator(name=self.side_name + "_global_in")
+        self.global_in.v.set(False)
+        self.global_in.setParent(self.static_GRP)
+
+        # PARENT
+        pm.parent(self.rootspace_GRP, self.static_GRP, self.pack_GRP)
+
+        # ATTRIBUTES
+        attributesLib.lock_and_hide([self.pack_GRP, self.static_GRP], t=True, r=True, s=True, v=False)
+        self.bindjoints_SEL = pm.sets(em=1, name=self.side_name + "_bindjoints_SEL")
+        self.control_SEL = pm.sets(em=1, name=self.side_name + "_control_SEL")
+
+        self.pack_GRPs = [self.pack_GRP, self.rootspace_GRP, self.static_GRP]
+
+
+        self.add_to_dict(base_key="inputs", key="part_input", value=self.part_in)
+
+    # def get_part_info(self, prefix, ns):
+    #
+    #     self.follow_dict = coreLib.get_partGRP_follows("{0}_{1}:guide".format(prefix, ns))
+    #
+    #     if self.follow_dict:
+    #         self.group_in = coreLib.follow_groups(prefix, self.follow_dict)
+    #
+    #         for grp_in in self.group_in:
+    #             # pm.scaleConstraint(self.global_in, grp_in)
+    #             grp_in.setParent(self.pack_GRPs[-1])
+
+
+
+
+
+
+
+
+
+    def add_to_dict(self, base_key=None, key=None, value=None):
+
+        if base_key not in self.part_dict.keys():
+            self.part_dict[base_key]={}
+
+        if key:
+            if key not in self.part_dict[base_key].keys():
+                self.part_dict[base_key][key] = ""
+
+        if key and value:
+            self.part_dict[base_key][key] = value
+
+
+
+
+
+
+
 
