@@ -13,7 +13,8 @@ from ..library import utilsLib
 from . import projectinfo
 
 from . import generictab
-
+from os import listdir
+from os.path import isfile, join
 
 
 # class
@@ -77,7 +78,11 @@ class GuidesWidget(generictab.GenericWidget):
 
         self.guidesInScene_lst = QtWidgets.QListWidget()
         self.guidesInScene_lst.setFixedHeight(100)
-        self.guidesInScene_lst.setFixedWidth(150)
+        self.guidesInScene_lst.setFixedWidth(200)
+
+        self.guideOutputs_lst = QtWidgets.QListWidget()
+        self.guideOutputs_lst.setFixedHeight(100)
+        self.guideOutputs_lst.setFixedWidth(200)
 
         self.transferGuide_btn = QtWidgets.QPushButton("Transfer guide")
 
@@ -93,9 +98,17 @@ class GuidesWidget(generictab.GenericWidget):
         guidesLib_formLayout = QtWidgets.QFormLayout()
         guidesLib_formLayout.addRow("Library:", guidesLib_layout)
 
+
+        header_layout = QtWidgets.QHBoxLayout()
+        sep1 = self.add_sepNameSep("Guides",width=50)
+        sep2 = self.add_sepNameSep("Outputs", width=50)
+        header_layout.addLayout(sep1)
+        header_layout.addLayout(sep2)
+
         guidesInScene_layout = QtWidgets.QHBoxLayout()
         guidesInScene_layout.addWidget(self.guidesInScene_lst)
-        self.guidesInScene_get(self.guidesInScene_lst)
+        guidesInScene_layout.addWidget(self.guideOutputs_lst)
+        self.get_guides_in_scene(self.guidesInScene_lst)
 
 
         transferGuide_layout = QtWidgets.QHBoxLayout()
@@ -105,6 +118,7 @@ class GuidesWidget(generictab.GenericWidget):
 
 
         self.main_layout.addLayout(guidesLib_formLayout)
+        self.main_layout.addLayout(header_layout)
         self.main_layout.addLayout(guidesInScene_layout)
         self.main_layout.addLayout(transferGuide_layout)
         self.main_layout.addLayout(self.guideAttr_layout)
@@ -123,7 +137,7 @@ class GuidesWidget(generictab.GenericWidget):
         self.refresh_generic()
         self.guidesLib_cmb.clear()
         self.guidesLib_cmb.addItems(self.get_files(self.project_dict["guides"], ignore_files=[".mayaSwatches", "__init__.py"]))
-        self.guidesInScene_get(self.guidesInScene_lst)
+        self.get_guides_in_scene(self.guidesInScene_lst)
 
 
     def namespace_text(self):
@@ -143,7 +157,7 @@ class GuidesWidget(generictab.GenericWidget):
             self.organise_guide(namespace=text+"_"+self.guide_part)
 
 
-    def guidesInScene_get(self, lst):
+    def get_guides_in_scene(self, lst):
         guides_GRP = cmds.ls("guides_GRP")
 
         lst.clear()
@@ -162,7 +176,19 @@ class GuidesWidget(generictab.GenericWidget):
                 for item in guides:
                     lst.addItem(item)
 
+    def get_guide_outputs(self, side, name, guide):
+        python_part = guide.split("_")[-1].lower()+".py"
+        self.guideOutputs_lst.clear()
 
+        if isfile(self.project_dict["python_parts"]+python_part):
+
+            part_instance = utilsLib.load_python_part(guide.split("_")[-1], side, name)
+            outputs = part_instance.outputs
+            outputs = [side+"_"+name+x for x in outputs]
+
+            if outputs:
+                for output in outputs:
+                    self.guideOutputs_lst.addItem(output)
 
 
 
@@ -198,8 +224,11 @@ class GuidesWidget(generictab.GenericWidget):
         :param guide: gah
         :return:
         """
+        if cmds.ls(guide):
+            attrs = cmds.listAttr(guide, ud=True)
+        else:
+            utilsLib.print_error("OPEN GUIDES SCENE TO EDIT INFO")
 
-        attrs = cmds.listAttr(guide, ud=True)
         guide_dict = {}
         for attr in attrs:
             if attr.endswith("_input"):
@@ -214,9 +243,13 @@ class GuidesWidget(generictab.GenericWidget):
 
         guide = (self.guidesInScene_lst.selectedItems())[0].text()
         guide_node = guide+":guide"
+        side = guide.split("_")[0]
+        name = guide.split("_")[1]
         guide_dict = self.get_guide_dict(guide_node)
+        self.get_guide_outputs(side, name, guide)
 
         cmds.select(guide_node)
+
 
         if self.widgets:
             self.delete(self.widgets)

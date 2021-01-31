@@ -8,7 +8,7 @@ from ..library import coreLib
 
 class PartSetup(object):
 
-    def __init__(self, side, name, part_name):
+    def __init__(self, part_name, side, name):
         self.side = side
         self.name = name
         self.part_name = part_name
@@ -17,16 +17,13 @@ class PartSetup(object):
 
         self.part_dict = {}
 
-    def build_guides(self, prefix):
+    def build_guides(self):
 
         print " "
         print " "
-        print "BUILDING PART --------- {0} {1}".format(prefix, self.part_name)
+        print "BUILDING PART --------- {0} {1}".format(self.side_name, self.part_name)
         print " "
         print " "
-
-
-        self.prefix = prefix
 
         self.packSetup()
 
@@ -42,16 +39,12 @@ class PartSetup(object):
         if bindJoints:
             [pm.connectAttr(self.pack_GRP.internal_vis, x + ".visibility") for x in none_bind]
 
-        # attributesLib.drawing_override(nodes=[self.model_GRP], overrideType='reference', control=self.C_visibility_CTL)
-
-    # def register_part(self):
-    #     self.part_dict = {}
 
     def packSetup(self):
         # if prefix and not prefix.endswith("_"):
         #     prefix += "_"
 
-        self.pack_GRP = pm.group(em=1, name=self.side_name + "pack_GRP")
+        self.pack_GRP = pm.group(em=1, name=self.side_name + "_pack_GRP")
         self.pack_GRP.addAttr("primary_vis", at="long", min=0, max=1, dv=1)
         self.pack_GRP.primary_vis.set(cb=True)
         self.pack_GRP.addAttr("internal_vis", at="long", min=0, max=1, dv=0)
@@ -87,38 +80,10 @@ class PartSetup(object):
         self.pack_GRPs = [self.pack_GRP, self.rootspace_GRP, self.static_GRP]
 
 
-        self.add_to_dict(base_key="inputs", key="part_input", value=self.part_in)
-
-    # def get_part_info(self, prefix, ns):
-    #
-    #     self.follow_dict = coreLib.get_partGRP_follows("{0}_{1}:guide".format(prefix, ns))
-    #
-    #     if self.follow_dict:
-    #         self.group_in = coreLib.follow_groups(prefix, self.follow_dict)
-    #
-    #         for grp_in in self.group_in:
-    #             # pm.scaleConstraint(self.global_in, grp_in)
-    #             grp_in.setParent(self.pack_GRPs[-1])
+        coreLib.add_input_dict(base_key="inputs", key="part_input", value=self.part_in, contraint_type="parentC", maintainOffset="True")
 
 
 
-
-
-
-
-
-
-    def add_to_dict(self, base_key=None, key=None, value=None):
-
-        if base_key not in self.part_dict.keys():
-            self.part_dict[base_key]={}
-
-        if key:
-            if key not in self.part_dict[base_key].keys():
-                self.part_dict[base_key][key] = ""
-
-        if key and value:
-            self.part_dict[base_key][key] = value
 
 
 

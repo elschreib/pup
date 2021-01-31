@@ -110,15 +110,15 @@ class GenericWidget(QtWidgets.QWidget):
         layout.addWidget(separator)
 
 
-    def add_sepNameSep(self, name):
+    def add_sepNameSep(self, name, width=150):
         label =  QtWidgets.QLabel(name)
         layout1 = QtWidgets.QHBoxLayout()
         layout1.addStretch()
-        self.add_separator(layout1,width=150)
+        self.add_separator(layout1,width=width)
         layout1.addStretch()
         layout1.addWidget(label)
         layout1.addStretch()
-        self.add_separator(layout1,width=150)
+        self.add_separator(layout1,width=width)
         layout1.addStretch()
         return layout1
 

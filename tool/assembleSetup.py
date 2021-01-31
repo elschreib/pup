@@ -54,15 +54,15 @@ class AssembleSetup(object):
         pm.sets(self.control_SEL, add=self.C_global_SEL)
 
         # global output
-        self.reference_JNT = pm.createNode("joint", name="reference_JNT")
+        self.C_root_JNT = pm.createNode("joint", name="C_root_JNT")
         self.static_GRP = pm.group(em=True, name="global_static_GRP")
         self.static_GRP.setParent(self.global_GRP)
-        self.reference_JNT.setParent(self.static_GRP)
-        pm.parentConstraint(self.C_global2_CTL,self.reference_JNT,mo=True)
-        pm.scaleConstraint(self.C_global2_CTL,self.reference_JNT,mo=True)
-        # self.reference_JNT.template.set(True)
-        # self.reference_JNT.drawStyle.set(2)
-        pm.sets(self.bindjoints_SEL,add=self.reference_JNT)
+        self.C_root_JNT.setParent(self.static_GRP)
+        pm.parentConstraint(self.C_global2_CTL,self.C_root_JNT,mo=True)
+        pm.scaleConstraint(self.C_global2_CTL,self.C_root_JNT,mo=True)
+        # self.C_root_JNT.template.set(True)
+        # self.C_root_JNT.drawStyle.set(2)
+        pm.sets(self.bindjoints_SEL,add=self.C_root_JNT)
 
 
         # attributes
@@ -128,37 +128,23 @@ class AssembleSetup(object):
         self.parts = []
         # builds parts if there otherwise removes from list and prints warning
         for ns, prefix in zip(ns_list, prefixs_list):
-            print "PART:     "+ns.lower()
-            # create module path
-            module_path = "pup.assets.parts.{0}.{1}".format(ns.lower(), ns)
-            components = module_path.split('.')
-            # mod = pup
-            mod = __import__(components[0])
 
-            pass_check = 0
-            for comp in components[1:]:
-                try:
-                    mod = getattr(mod, comp)
-                    pass_check = 1
-                except:
-                    pass_check = 0
-
-            if pass_check == 1:
-                guide_check = pm.ls("{0}_{1}:guide".format(prefix, ns))
-                if guide_check:
-                    side = prefix.split("_")[0]
-                    name = prefix.split("_")[-1]
-                    part = mod(side, name, ns)
-                    part.build_guides(prefix)
-                    self.parts.append(part)
-                else:
-                    utilsLib.print_it("REMOVING_____{0}_{1}_____ due to no guide".format(prefix, ns))
-                    self.part_ns.remove(ns)
-                    self.prefixs.remove(prefix)
+            guide_check = pm.ls("{0}_{1}:guide".format(prefix, ns))
+            if guide_check:
+                # get side and name
+                side = prefix.split("_")[0]
+                name = prefix.split("_")[-1]
+                # get part instance
+                part = utilsLib.load_python_part(ns,side, name)
+                # build guide
+                part.build_guides()
+                # add part instance to list
+                self.parts.append(part)
             else:
-                utilsLib.print_it("REMOVING_____{1}_______ due to no matching part".format(prefix, ns))
+                utilsLib.print_it("REMOVING_____{0}_{1}_____ due to no guide".format(prefix, ns))
                 self.part_ns.remove(ns)
                 self.prefixs.remove(prefix)
+
 
 
         # ============================ AFTER BUILD RE-LOOP THROUGH PARTS TO CONNECT
@@ -166,22 +152,13 @@ class AssembleSetup(object):
             self.connect_parts(part)
             # CONNECT PART IN
             guide_node = prefix+"_"+ns+":"+"guide"
+
             # connect part part_in to assigned input
-            # TODO: rewrite parts to allow the input to = node and output to = node
-            print part.part_dict
             guide_dict = coreLib.get_guideAttr_dict(guide_node)
+            coreLib.input_dict_connect(part.part_dict, guide_dict)
 
 
-            for key in guide_dict.keys():
-                if key == "inputs":
-                    for input_key in guide_dict[key].keys():
-                        connector = pm.getAttr(guide_node+input_key)
-                        constraint_check = cmds.ls(connector)
-                        if constraint_check:
-                            pm.parentConstraint(connector, part.part_in, mo=True)
-                            pm.scaleConstraint(connector, part.part_in, mo=True)
-                        else:
-                            utilsLib.print_error("NO INPUT FOR: {0} ----- attr:{1}".format(guide_node, input_key))
+
             attrs_dict = coreLib.get_partGRP_connects(guide_node)
             print attrs_dict
             if attrs_dict:
@@ -214,10 +191,10 @@ class AssembleSetup(object):
         GLOBAL - C_VISIBILITY_CTL > PACK_GRP + "primary_vis", "internal_vis"
         """
 
-        [pm.connectAttr(self.reference_JNT+"."+axis, part.rootspace_GRP+"."+axis) for axis in "translate","rotate","scale"]
+        [pm.connectAttr(self.C_root_JNT+"."+axis, part.rootspace_GRP+"."+axis) for axis in "translate","rotate","scale"]
 
         part.pack_GRP.setParent(self.rig_parts_GRP)
-        [pm.connectAttr(self.reference_JNT+"."+axis, part.global_in+"."+axis) for axis in ["translate", "rotate", "scale"]]
+        [pm.connectAttr(self.C_root_JNT+"."+axis, part.global_in+"."+axis) for axis in ["translate", "rotate", "scale"]]
 
         [pm.connectAttr(self.C_visibility_CTL+"."+attr, part.pack_GRPs[0]+"."+attr) for attr in ["primary_vis", "internal_vis"]]
 

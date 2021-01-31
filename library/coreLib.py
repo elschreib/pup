@@ -15,9 +15,12 @@ LIBRARY OF CORE FUNCTIONS NOT NEEDED IN NORMAL PART BUILD
 """
 
 
+constraint_list = ["parentC", "pointC", "orientC", "matrixC"]
+
 
 def get_guideAttr_dict(guide):
 
+    print guide
     guide_dict = {}
     attrs = cmds.listAttr(guide, ud=True)
 
@@ -26,34 +29,84 @@ def get_guideAttr_dict(guide):
     follows = None
 
     for attr in attrs:
-        print attr
-        if "_input" in attrs:
-            print "THERES AN INPUT IN ATTR"
+        if "_input" in attr:
             if "inputs" not in guide_dict.keys():
                 print "CREATING INPUT"
                 guide_dict["inputs"] = {}
             if "inputs" in guide_dict.keys():
                 guide_dict["inputs"][attr] = cmds.getAttr(guide + "." + attr)
 
-
-    #         inputs = True
-    #     if "_follow" in attrs:
-    #         follows = True
-    #
-    # if inputs:
-    #     guide_dict["inputs"] = {}
-    # if follows:
-    #     guide_dict["follows"] = {}
-    #
-    # for attr in attrs:
-    #     if attr.endswith("_input"):
-    #         guide_dict["inputs"][attr]=cmds.getAttr(guide+"."+attr)
-
-    print guide_dict
-
-
+    guide_dict["name"]=guide
 
     return guide_dict
+
+
+def write_part_dict(path, name, base_key, key, value):
+
+    if os.path.isfile(path+name):
+        part_dict = utilsLib.loadJson(path+name)
+    else:
+        part_dict ={}
+
+    if base_key not in part_dict.keys():
+        part_dict[base_key]={}
+
+    part_dict[base_key][key]=value
+
+    utilsLib.saveJson(path+name)
+
+    return part_dict
+
+
+
+
+
+def read_part_dict(path):
+
+    part_dict = utilsLib.loadJson(path)
+
+    return part_dict
+
+
+
+def input_dict_connect(part_dict, guide_dict):
+    # TODO: add type of constraint
+    """
+    part_dict has inputs guide dict has outputs
+    :param part_dict:
+    :param guide_dict:
+    :return:
+    """
+
+
+    for key in guide_dict.keys():
+        if key == "inputs":
+            for input_key in guide_dict[key].keys():
+                print input_key
+                connector = pm.getAttr(guide_dict["name"]+"."+input_key)
+                print connector
+                constraint_check = cmds.ls(connector)
+                if constraint_check:
+                    pm.parentConstraint(connector, part_dict["inputs"][input_key], mo=True)
+                    pm.scaleConstraint(connector, part_dict["inputs"][input_key], mo=True)
+                else:
+                    utilsLib.print_error("NO INPUT FOR: {0} ----- attr:{1}".format(guide_dict["name"], input_key))
+
+
+def add_input_dict(self, base_key="inputs", key=None, value=None, contraint_type="parentC", maintainOffset=True):
+
+    if base_key not in self.part_dict.keys():
+        self.part_dict[base_key]={}
+
+    if key:
+        if key not in self.part_dict[base_key].keys():
+            self.part_dict[base_key][key] = ""
+
+    if key and value:
+        self.part_dict[base_key][key] = [value, contraint_type, maintainOffset]
+
+
+
 
 
 
@@ -152,31 +205,7 @@ def follow_groups(prefix, dicts):
                 pm.addAttr(grp, ln="input_node", dt="string")
                 pm.setAttr(grp.input_node, cb=True)
                 pm.setAttr(grp.input_node, group_constraint)
-    # for itr, dict in enumerate(dicts):
-    #     # if single dict
-    #     if len(dicts) == 1:
-    #         combined_dict = dicts
-    #     # merge dicts
-    #     else:
-    #         if itr == 0:
-    #             combined_dict = dicts[dict].copy()
-    #         else:
-    #             combined_dict.update(dicts[dict])
-    #
-    # group_names = combined_dict.keys()
-    #
-    # groups = []
-    # for group_name in group_names:
-    #     name = "{0}_{1}_in".format(prefix, group_name)
-    #
-    #     if not cmds.ls(name):
-    #         grp = pm.group(em=True, name=name)
-    #         groups.append(grp)
-    #
-    #         # add attr for constraint
-    #         pm.addAttr(grp, ln="input_node", dt="string")
-    #         pm.setAttr(grp.input_node, cb=True)
-    #         pm.setAttr(grp.input_node, combined_dict[group_name])
+
 
     return groups
 
