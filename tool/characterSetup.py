@@ -24,25 +24,12 @@ data = dataInOut.DataInOut("")
 class CharacterSetup(assembleSetup.AssembleSetup):
 
 
-    def __init__(self, project_path):
+    def __init__(self, project_dict):
 
-        self.project_path = project_path
-        # SETUP FOR BUILD -- CHECKS FOR FOLDERS, IF THERE IT WILL BUILD
+        self.project_dict = project_dict
+        self.project_path = self.project_dict["base_path"] + "/" + self.project_dict["project"] + "/" + self.project_dict["asset"]
+
         data.project_load(self.project_path)
-
-        # self.folder_scene = data.folder_project + "rigging/work/scene/"
-        # self.folder_data = data.folder_project + "rigging/work/data/"
-        #
-        # self.folder_model = data.folder_project + "model/publish/"
-        #
-        # # ORDER OF BUILD
-        # #model
-        # self.folder_anim = self.folder_model + "anim/"
-        # self.folder_render = self.folder_model + "render/"
-        #
-        # self.folder_skinWeights = self.folder_data + "skinweights/"
-        # self.folder_controlShapes = self.folder_data + "controlShapes/"
-        # self.folder_shaders = self.folder_data + "shaders/"
 
 
 

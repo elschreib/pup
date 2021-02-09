@@ -36,6 +36,8 @@ def project_info(project, asset, step=""):
     project_dict["project"] = current_project
     project_dict["asset"] = current_asset
     project_dict["step"] = step2
+    project_dict["variant"] = ""
+    project_dict["base_folder"] = PROJECTS_FOLDER
 
     project_dict["python_parts"] =threeD_FOLDER+"_puprepo/pup/assets/parts/"
     project_dict["base_path"] = PROJECTS_FOLDER

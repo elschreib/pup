@@ -63,16 +63,17 @@ def version_control(version_up=False, folder_path=None):
     else:
         print_error("FAILED TO GET VERSION")
 
-def listdir_with_ignore(path, ignore_list=["", ""]):
+def listdir_with_ignore(path, ignore_list=["", ""], files=False, folders=True):
     """
     returns items in directory if they dont contain ignore list
     :param path:
     :param ignore_list:
     :return:
     """
+    list = []
+    if folders:
+        list = os.listdir(path)
 
-
-    list = os.listdir(path)
 
     new_list = []
     if list:
@@ -196,7 +197,9 @@ def saveJson(my_data,path,version=0):
     if not ".json" in path:
         path+=".json"
     if version:
-        path = uniqueFile(path)
+        pass
+        # path = uniqueFile(path)
+    print path
     with open(path, 'w') as outfile:
         json.dump(my_data, outfile, sort_keys = True, indent = 4)
     try:
