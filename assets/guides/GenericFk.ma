@@ -1,9 +1,10 @@
 //Maya ASCII 2018ff08 scene
-//Name: GenericControl.ma
-//Last modified: Wed, Feb 10, 2021 08:03:10 AM
+//Name: GenericFk.ma
+//Last modified: Wed, Feb 10, 2021 08:02:46 AM
 //Codeset: 1252
 requires maya "2018ff08";
 requires -nodeType "aiOptions" -nodeType "aiAOVDriver" -nodeType "aiAOVFilter" "mtoa" "3.0.0.2";
+requires "stereoCamera" "10.0";
 requires "stereoCamera" "10.0";
 currentUnit -l centimeter -a degree -t film;
 fileInfo "application" "maya";
@@ -79,28 +80,32 @@ createNode camera -s -n "sideShape" -p "side";
 createNode transform -n "guide";
 	rename -uid "2C4590E1-4964-3E0F-23DE-1F8C7EF31FEC";
 	addAttr -ci true -sn "part_input" -ln "part_input" -dt "string";
-	addAttr -ci true -sn "end_input" -ln "end_input" -dt "string";
 	setAttr -cb on ".part_input";
-	setAttr -cb on ".end_input";
 createNode transform -n "control_01_GUIDE" -p "guide";
 	rename -uid "7F6B74D6-420F-9EB4-5278-99A3D6002BA2";
 createNode locator -n "control_01_GUIDEShape" -p "control_01_GUIDE";
 	rename -uid "60222C07-4082-2B7F-7B0C-D398E22FC7DE";
 	setAttr -k off ".v";
+createNode transform -n "control_02_GUIDE" -p "guide";
+	rename -uid "DD9CC3DC-4E11-58F3-93ED-F6BA4E1FA095";
+	setAttr ".t" -type "double3" 0 1.6984239223210311 0 ;
+createNode locator -n "control_02_GUIDEShape" -p "control_02_GUIDE";
+	rename -uid "55EE2475-4B8E-09A6-419A-24896B995129";
+	setAttr -k off ".v";
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "C4D8A778-4A5C-D5B6-2B7C-0CB3B43E3D34";
+	rename -uid "81A8CFB9-4883-3C1E-0FB6-72BC69F792CF";
 	setAttr -s 2 ".lnk";
 	setAttr -s 2 ".slnk";
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "E0A462FD-4F4F-2790-A487-599F64BD1AA9";
+	rename -uid "C4ACF785-4AA3-AC6D-32AA-76BBCB3D35A4";
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "D64B5F16-4F4A-A633-9AC3-AC8F3E337BAA";
+	rename -uid "7EF90143-4253-5B9B-3449-2B8A38CC101F";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "A68E8ADB-4494-89E5-352E-3981F1B5B94F";
+	rename -uid "E8170511-4EEE-0D4A-AC31-F7B22E9CDA0F";
 createNode displayLayer -n "defaultLayer";
 	rename -uid "68086FF2-4A28-FD40-16A4-61BB41C0CF4B";
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "4CB56F80-4D0D-3E7C-7852-5EBA4F486B92";
+	rename -uid "BF4EECFA-4785-3375-E833-FE933C3F9BD7";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "9348CE22-48D3-4603-9926-C1A7334FDDF5";
 	setAttr ".g" yes;
@@ -204,4 +209,4 @@ relationship "shadowLink" ":lightLinker1" ":initialParticleSE.message" ":default
 connectAttr "layerManager.dli[0]" "defaultLayer.id";
 connectAttr "renderLayerManager.rlmi[0]" "defaultRenderLayer.rlid";
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
-// End of GenericControl.ma
+// End of GenericFk.ma

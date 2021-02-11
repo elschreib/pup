@@ -83,7 +83,7 @@ class RiggingWidget(generictab.GenericWidget):
         :param path: path only goes up till asset e.g  "E:/Files/3D/goblin"
         :return:
         """
-
+        cmds.file(n=True, f=True)
         guides_scene = utilsLib.import_latest(dict["scene"], "*guides*.m?")
         print guides_scene
         utilsLib.print_it("BUILDING: {0} {1}".format(dict["project"], dict["asset"]))

@@ -16,13 +16,12 @@ LIBRARY OF CORE FUNCTIONS NOT NEEDED IN NORMAL PART BUILD
 
 # ============================= FOLLOW GROUPS
 def get_partGRP_follows(node):
-
     """
     get follow info, returns a dict
     :param node: single node
     :return: nested dict
     """
-
+    print node
     attr_dict = {}
     attrs = pm.listAttr(node, cb=True)
     for itr, attr in enumerate(attrs):
@@ -44,23 +43,6 @@ def get_partGRP_follows(node):
                 attr_dict[follow_name][count] = name.replace(" ", ""), constraint
     return attr_dict
 
-
-    # attr_dict = {}
-    # attrs = pm.listAttr(node, cb=True)
-    # for itr, attr in enumerate(attrs):
-    #     if attr.startswith("follow"):
-    #         # attribute name e.g IK, PV
-    #         follow_name = attr.split("_")[-1]
-    #         # get name + connection splitting at ","
-    #         input_list = pm.getAttr(node + "." + attr).split(",")
-    #         # split names and constraints
-    #         names = [x.split("=")[0] for x in input_list]
-    #         constraints = [x.split("=")[-1] for x in input_list]
-    #
-    #         # put them into their own dict
-    #         attr_dict[follow_name] = {}
-    #         for name, constraint in zip(names, constraints):
-    #             attr_dict[follow_name][name.replace(" ", "")] = constraint
 
 
 def follow_groups(prefix, dicts):

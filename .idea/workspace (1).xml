@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="67fb146d-37bf-4330-a049-268e286944a8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/library/coreLib.py" beforeDir="false" afterPath="$PROJECT_DIR$/library/coreLib.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mayaGUI/generictab.py" beforeDir="false" afterPath="$PROJECT_DIR$/mayaGUI/generictab.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>geometrylib</find>
+      <find>transformsLib</find>
+      <find>cmds.</find>
+      <find>theConstraint[0]</find>
+      <find>null_grp</find>
+      <find>self.prefix</find>
+      <find>variants_cmb</find>
+      <find>Widget</find>
+      <find>departmentLayout</find>
+      <find>sculpt_lst</find>
+      <find>guidesInScene_get</find>
+      <find>self.departmentLayout</find>
+      <find>generictab</find>
+      <find>folder_publish</find>
+      <find>packSetup</find>
+      <find>guide</find>
+      <find>self.name</find>
+      <find>guidesInScene</find>
+      <find>guidesInScene_lst</find>
+      <find>self.reference_JNT</find>
+      <find>get_guidesInScene</find>
+      <find>self.</find>
+      <find>append</find>
+      <find>data</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>kinematicsLib</replace>
+      <replace>geometryLib</replace>
+      <replace>transformsLib</replace>
+      <replace>transformLib</replace>
+      <replace>pm.</replace>
+      <replace>theConstraint</replace>
+      <replace>null_grps</replace>
+      <replace>prefix</replace>
+      <replace>self.guideAttr_layout</replace>
+      <replace>step_variant_fld</replace>
+      <replace>self.side_name</replace>
+      <replace>guideOutputs</replace>
+      <replace>self.C_root_JNT</replace>
+      <replace>get_guides_in_scene</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/mayaGUI/utilstab.py" />
+        <option value="$PROJECT_DIR$/mayaGUI/tester.py" />
+        <option value="$PROJECT_DIR$/mayaGUI/lightingtab.py" />
+        <option value="$PROJECT_DIR$/mayaGUI/example_UI.py" />
+        <option value="$PROJECT_DIR$/mayaGUI/projectinfo.py" />
+        <option value="$PROJECT_DIR$/mayaGUI/generictab.py" />
+        <option value="$PROJECT_DIR$/library/partIO.py" />
+        <option value="$PROJECT_DIR$/mayaGUI/guidestab.py" />
+        <option value="$PROJECT_DIR$/assets/parts/genericcontrol.py" />
+        <option value="$PROJECT_DIR$/tool/assembleSetup.py" />
+        <option value="$PROJECT_DIR$/tool/partSetup.py" />
+        <option value="$PROJECT_DIR$/library/coreLib.py" />
+        <option value="$PROJECT_DIR$/library/utilsLib.py" />
+        <option value="$PROJECT_DIR$/library/partio.py" />
+        <option value="$PROJECT_DIR$/tool/characterSetup.py" />
+        <option value="$PROJECT_DIR$/mayaGUI/pupui.py" />
+        <option value="$PROJECT_DIR$/mayaGUI/riggingtab.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1752" />
+    <option name="y" value="-8" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectId" id="1kn6GS4zNd4mVi6zDLjOhmuiDo8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="__init__.py" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pup" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="__init__.py" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pup" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="__init__.py" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pup" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="parts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="__init__.py" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pup" type="462c0819:PsiDirectoryNode" />
+              <item name="extras" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="__init__.py" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pup" type="462c0819:PsiDirectoryNode" />
+              <item name="mayaGUI" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="__init__.py" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pup" type="462c0819:PsiDirectoryNode" />
+              <item name="tool" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/parts" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Leo7s\Google Drive\projectsync\3D\_puprepo\pup\assets\parts" />
+      <recent name="E:\GoogleDrive\projectsync\3D\_puprepo\pup\mayaGUI" />
+      <recent name="$PROJECT_DIR$/library" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="maya2018" type="MAYACHARM_RUN_CONFIGURATION" factoryName="MayaCharm Configuration Factory">
+      <option name="executionType" value="CODE" />
+      <option name="mayaSdkPath" value="C:\Program Files\Autodesk\Maya2018\bin\mayapy.exe" />
+      <option name="scriptCodeText" value="import pymel.core as pm&#10;import maya.cmds as cmds&#10;import sys&#10;sys.path.insert(0,'$PROJECT_DIR$/../')&#10;sys.path.insert(0,'$PROJECT_DIR$/../')&#10;import pup&#10;&#10;from pup.mayaGUI import pupui&#10;pupui.open_import_dialog.close()&#10;&#10;allModules = sys.modules&#10;for key in allModules.keys():&#10;    if &quot;pup&quot; in key:&#10;        print key&#10;        del allModules[key]&#10;    else:&#10;        stringValue = str(allModules[key])&#10;        if &quot;pup&quot; in stringValue:&#10;            del allModules[key]&#10;import maya.cmds as cmds;import pymel.core as pm;import maya.mel as mel&#10;import pup&#10;from pup.mayaGUI import pupui&#10;" />
+      <option name="scriptFilePath" value="E:\GoogleDrive\projectsync\3D\_puprepo\pup\mayaGUI\tester.py" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="67fb146d-37bf-4330-a049-268e286944a8" name="Default Changelist" comment="" />
+      <created>1584359766294</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584359766294</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1912" y="-8" width="1616" height="1176" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17870723" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32981783" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32981783" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="bottom" id="MayaLog" order="11" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/mayaGUI/pupui.py</url>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/mayaGUI/utilstab.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/mayaGUI/guidestab.py</url>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" log-message="true" suspend="NONE" type="python-line">
+          <url>file://$PROJECT_DIR$/library/coreLib.py</url>
+          <line>17</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/mayaGUI/tester.py" />
+    <entry file="file://$PROJECT_DIR$/../../_Resources/Scripts/other/pyside2_examples/vol1/11-pyside2_for_maya-open_import_dialog_part_3/open_import_dialog.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="587">
+          <caret line="70" column="78" selection-start-line="70" selection-start-column="55" selection-end-line="70" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../_Resources/Scripts/other/pyside2_examples/vol1/13-pyside2_for_maya-open_import_dialog_part_5/open_import_dialog.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="111" column="12" selection-start-line="111" selection-start-column="12" selection-end-line="112" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mayaGUI/lightingtab.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mayaGUI/texturetab.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="64" lean-forward="true" selection-start-line="64" selection-end-line="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mayaGUI/example_UI.py" />
+    <entry file="file://$PROJECT_DIR$/mayaGUI/check.py" />
+    <entry file="file://$PROJECT_DIR$/mayaGUI/signals.py" />
+    <entry file="file://$PROJECT_DIR$/mayaGUI/utilstab.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/geometryLib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="184" column="25" selection-start-line="184" selection-start-column="17" selection-end-line="184" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mayaGUI/guidestab.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2856">
+          <caret line="184" column="76" selection-start-line="184" selection-start-column="76" selection-end-line="184" selection-end-column="76" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/RVt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tool/partSetup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1377">
+          <caret line="87" selection-start-line="87" selection-end-line="87" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/coreLib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1683">
+          <caret line="106" selection-start-line="106" selection-end-line="106" />
+          <folding>
+            <element signature="e#1#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tool/assembleSetup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2448">
+          <caret line="154" selection-start-line="154" selection-end-line="154" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/extras/transferpoints.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mayaGUI/transferUI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="655">
+          <caret line="160" column="33" selection-start-line="160" selection-start-column="33" selection-end-line="160" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/utilsLib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="200" column="14" selection-start-line="200" selection-start-column="14" selection-end-line="200" selection-end-column="14" />
+          <folding>
+            <element signature="e#151#442#0" />
+            <element signature="e#199#373#0" />
+            <element signature="e#505#1962#0" />
+            <element signature="e#505#648#1" />
+            <element signature="e#941#1675#0" />
+            <element signature="e#978#1276#0" />
+            <element signature="e#1065#1276#0" />
+            <element signature="e#1111#1276#0" />
+            <element signature="e#1362#1675#0" />
+            <element signature="e#1695#1850#0" />
+            <element signature="e#2021#2451#0" />
+            <element signature="e#2021#2150#1" />
+            <element signature="e#2221#2373#0" />
+            <element signature="e#2248#2349#0" />
+            <element signature="e#2291#2349#0" />
+            <element signature="e#2392#2451#0" />
+            <element signature="e#2506#3163#0" />
+            <element signature="e#2506#2683#1" />
+            <element signature="e#2799#3098#0" />
+            <element signature="e#2947#3034#0" />
+            <element signature="e#3216#4012#0" />
+            <element signature="e#3216#3458#1" />
+            <element signature="e#3542#3904#0" />
+            <element signature="e#4092#5007#0" />
+            <element signature="e#4092#4333#1" />
+            <element signature="e#4496#4887#0" />
+            <element signature="e#5511#5715#0" />
+            <element signature="e#5511#5645#1" />
+            <element signature="e#5745#6011#0" />
+            <element signature="e#5745#5844#1" />
+            <element signature="e#5893#5995#0" />
+            <element signature="e#5910#5953#0" />
+            <element signature="e#6065#7023#0" />
+            <element signature="e#6065#6699#1" />
+            <element signature="e#6722#7023#0" />
+            <element signature="e#6796#7023#0" />
+            <element signature="e#6828#6969#0" />
+            <element signature="e#6881#6969#0" />
+            <element signature="e#7082#7279#0" />
+            <element signature="e#7155#7279#0" />
+            <element signature="e#7328#7814#0" />
+            <element signature="e#7577#7688#0" />
+            <element signature="e#7594#7645#0" />
+            <element signature="e#7717#7767#0" />
+            <element signature="e#7849#7902#0" />
+            <element signature="e#7967#8017#0" />
+            <element signature="e#8049#8067#0" />
+            <element signature="e#8101#8121#0" />
+            <element signature="e#8124#8156#0" />
+            <element signature="e#8898#9121#0" />
+            <element signature="e#9006#9102#0" />
+            <element signature="e#9189#9321#0" />
+            <element signature="e#9352#9900#0" />
+            <element signature="e#9352#9499#1" />
+            <element signature="e#9665#9873#0" />
+            <element signature="e#9700#9873#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/partio.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="78" column="29" lean-forward="true" selection-start-line="78" selection-start-column="29" selection-end-line="78" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#341#1569#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tool/characterSetup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="43" column="28" lean-forward="true" selection-start-line="43" selection-start-column="28" selection-end-line="43" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mayaGUI/modeltab.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="16" column="44" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="44" />
+          <folding>
+            <element signature="e#356#5157#0" />
+            <element signature="e#408#637#0" />
+            <element signature="e#677#1599#0" />
+            <element signature="e#1639#2804#0" />
+            <element signature="e#2849#3322#0" />
+            <element signature="e#3357#3497#0" />
+            <element signature="e#3535#3851#0" />
+            <element signature="e#3892#3972#0" />
+            <element signature="e#4012#4276#0" />
+            <element signature="e#4316#4463#0" />
+            <element signature="e#4506#4678#0" />
+            <element signature="e#4721#4857#0" />
+            <element signature="e#4897#5157#0" />
+            <element signature="e#5194#5323#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/parts/genericcontrol.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="12" selection-start-line="12" selection-end-line="25" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mayaGUI/generictab.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="199" lean-forward="true" selection-start-line="199" selection-end-line="199" />
+          <folding>
+            <element signature="e#397#591#0" />
+            <element signature="e#639#1429#0" />
+            <element signature="e#1477#2403#0" />
+            <element signature="e#2457#3097#0" />
+            <element signature="e#3158#3443#0" />
+            <element signature="e#3194#3362#0" />
+            <element signature="e#3491#3550#0" />
+            <element signature="e#3610#3851#0" />
+            <element signature="e#3909#4250#0" />
+            <element signature="e#4293#4419#0" />
+            <element signature="e#4306#4333#0" />
+            <element signature="e#4498#4677#0" />
+            <element signature="e#4753#5266#0" />
+            <element signature="e#4814#5020#0" />
+            <element signature="e#4941#5020#0" />
+            <element signature="e#5058#5183#0" />
+            <element signature="e#5107#5183#0" />
+            <element signature="e#5320#5741#0" />
+            <element signature="e#5479#5666#0" />
+            <element signature="e#5778#6359#0" />
+            <element signature="e#5778#5843#1" />
+            <element signature="e#5999#6030#0" />
+            <element signature="e#6435#7037#0" />
+            <element signature="e#6533#7037#0" />
+            <element signature="e#6871#7037#0" />
+            <element signature="e#7085#7776#0" />
+            <element signature="e#7231#7628#0" />
+            <element signature="e#7543#7628#0" />
+            <element signature="e#7656#7776#0" />
+            <element signature="e#7820#7863#0" />
+            <element signature="e#7906#8025#0" />
+            <element signature="e#8084#9359#0" />
+            <element signature="e#8084#8262#1" />
+            <element signature="e#8512#8624#0" />
+            <element signature="e#8664#9273#0" />
+            <element signature="e#8980#9273#0" />
+            <element signature="e#9412#9884#0" />
+            <element signature="e#9571#9807#0" />
+            <element signature="e#9939#10248#0" />
+            <element signature="e#10298#10431#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mayaGUI/projectinfo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mayaGUI/pupui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="484">
+          <caret line="210" selection-start-line="210" selection-end-line="218" selection-end-column="31" />
+          <folding>
+            <element signature="e#754#937#0" />
+            <element signature="e#754#823#1" />
+            <element signature="e#978#992#0" />
+            <element signature="e#1345#1746#0" />
+            <element signature="e#1806#1924#0" />
+            <element signature="e#3014#5611#0" />
+            <element signature="e#4841#4886#0" />
+            <element signature="e#5666#6995#0" />
+            <element signature="e#5666#5775#1" />
+            <element signature="e#7036#7163#0" />
+            <element signature="e#7202#7361#0" />
+            <element signature="e#7521#8318#0" />
+            <element signature="e#8130#8158#0" />
+            <element signature="e#9195#9595#0" />
+            <element signature="e#9274#9299#0" />
+            <element signature="e#9867#11489#0" />
+            <element signature="e#9984#11489#0" />
+            <element signature="e#10308#11414#0" />
+            <element signature="e#10526#10649#0" />
+            <element signature="e#10720#11414#0" />
+            <element signature="e#11012#11181#0" />
+            <element signature="e#11242#11414#0" />
+            <element signature="e#11513#12046#0" />
+            <element signature="e#11513#11566#1" />
+            <element signature="e#11710#11741#0" />
+            <element signature="e#12121#13974#0" />
+            <element signature="e#12121#12404#1" />
+            <element signature="e#12527#13974#0" />
+            <element signature="e#12627#13415#0" />
+            <element signature="e#12893#12970#0" />
+            <element signature="e#13015#13333#0" />
+            <element signature="e#13443#13974#0" />
+            <element signature="e#13598#13666#0" />
+            <element signature="e#14003#16823#0" />
+            <element signature="e#14768#15062#0" />
+            <element signature="e#15156#15296#0" />
+            <element signature="e#15302#15329#0" />
+            <element signature="e#15520#15954#0" />
+            <element signature="e#15622#15704#0" />
+            <element signature="e#16220#16595#0" />
+            <element signature="e#16300#16527#0" />
+            <element signature="e#16345#16527#0" />
+            <element signature="e#16652#16823#0" />
+            <element signature="e#16699#16776#0" />
+            <element signature="e#16871#17066#0" />
+            <element signature="e#16884#16951#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mayaGUI/riggingtab.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="56" column="46" selection-start-line="56" selection-start-column="46" selection-end-line="56" selection-end-column="46" />
+          <folding>
+            <element signature="e#449#680#0" />
+            <element signature="e#2359#2435#0" />
+            <element signature="e#2476#2498#0" />
+            <element signature="e#2541#3076#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

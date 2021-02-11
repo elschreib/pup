@@ -265,14 +265,12 @@ class GenericWidget(QtWidgets.QWidget):
             if "." in current_scene:
                 current_scene = current_scene.split(".")[0]
 
+            # get publish number from scene
             versionNumber = re.findall(r'\d+', current_scene)[0]
 
-
-
-
+            # if version exists print warning
             if os.path.isdir(step_variant_fld + "v"+versionNumber):
                 print "VERSION EXISTS, version up please"
-
             else:
                 os.makedirs(step_variant_fld + "v"+versionNumber)
                 objects = cmds.ls(selection=True)
@@ -304,7 +302,7 @@ class GenericWidget(QtWidgets.QWidget):
         if not save_name.endswith(".abc"):
             save_name = save_name+".abc"
 
-        command = " -uvWrite -worldSpace -writeUvSets " + root + " -file " + save_name
+        command = " -uvWrite -worldSpace -writeUvSets " + root + " -file '%s'"%save_name
         cmds.AbcExport(j=command)
 
 
