@@ -84,7 +84,7 @@ def listdir_with_ignore(path, ignore_list=["", ""], files=False, folders=True):
         return new_list
     else:
         print print_warning("NO ITEMS IN DIRECTORY")
-        return
+        return None
 
 
 

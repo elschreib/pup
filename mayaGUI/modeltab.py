@@ -108,7 +108,10 @@ class ModelWidget(generictab.GenericWidget):
     def sculpt_exports(self):
         self.sculpt_lst.clear()
         if os.path.isdir(self.project_dict["sculpt_export"]):
-            items = os.listdir(self.project_dict["sculpt_export"])
+            items = utilsLib.listdir_with_ignore(self.project_dict["sculpt_export"],
+                                                 ignore_list=[".ini"],
+                                                 files=True,
+                                                 folders=True)
         else:
             items = ["None"]
         for item in items:

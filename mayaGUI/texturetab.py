@@ -118,10 +118,11 @@ class TextureWidget(generictab.GenericWidget):
     def texture_files(self):
         self.textureFiles_cmb.clear()
         if os.path.isdir(self.project_dict["painter_scene"]):
-            files = os.listdir(self.project_dict["painter_scene"])[::-1]
+            files = utilsLib.listdir_with_ignore(self.project_dict["painter_scene"], ignore_list=["."], files=True, folders=True)
         else:
-            files="None"
-        self.textureFiles_cmb.addItems(files)
+            files=["None"]
+        if files:
+            self.textureFiles_cmb.addItems(files[::-1])
 
 
 
@@ -131,9 +132,9 @@ class TextureWidget(generictab.GenericWidget):
     def texture_nodes(self):
         self.textureNodes_cmb.clear()
         if os.path.isdir(self.project_dict["painter_export"]):
-            files = os.listdir(self.project_dict["painter_export"])[::-1]
+            files = utilsLib.listdir_with_ignore(self.project_dict["painter_export"], ignore_list=["."], files=True, folders=True)
         else:
-            files="None"
+            files = ["None"]
         print files
         self.textureNodes_cmb.addItems(files)
 
@@ -190,10 +191,10 @@ class TextureWidget(generictab.GenericWidget):
         texture_node = self.textureNodes_cmb.currentText()
         if texture_node:
             path = self.project_dict["painter_export"] + texture_node + "/"
-
-            files = self.get_all_versions(path, excludes=[".tx"], search_for=slot)
-            if files:
-                return files
+            if texture_node != "None":
+                files = self.get_all_versions(path, excludes=[".tx"], search_for=slot)
+                if files:
+                    return files
 
         else:
             return ["None"]
