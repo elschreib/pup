@@ -88,10 +88,6 @@ def listdir_with_ignore(path, ignore_list=["", ""], files=False, folders=True):
 
 
 
-
-
-
-
 def import_latest(folder_path, wild_card):
     """
 
