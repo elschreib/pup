@@ -6,6 +6,88 @@ import glob, json, os, re
 
 print "utilsLib"
 
+def version_checker(string):
+    version = None
+    if len(string) == 4:
+        if string[0].isalpha() and unicode(string[1]).isnumeric() and unicode(string[2]).isnumeric() and unicode(
+                string[3]).isnumeric():
+            version = string
+    if version:
+        return version
+    else:
+        return None
+
+def version_control(version_up=False, folder_path=None):
+    """
+    checks for versions in folder and returns all, or all + new version
+    :param version_up:
+    :param folder_path:
+    :return:
+    """
+    print folder_path
+    if not os.path.isdir(folder_path):
+        print_error("PATH DOESNT EXIST: " + folder_path)
+    if not folder_path.endswith("/"):
+        folder_path = folder_path+"/"
+
+
+    versions = glob.glob(folder_path + "v*")
+    version_folders = []
+
+    if versions:
+        for version in versions:
+            versionFolder = (version).split("/")[-1]
+            if versionFolder:
+                if "\\" in versionFolder:
+                    version_folder = versionFolder.split("\\")[-1]
+                    if version_checker(version_folder):
+                        version_folders.append(version_folder)
+        version_folders = sorted(version_folders)
+        if version_up:
+            numbers = re.findall(r'\d+', version_folders[-1])[0]
+            padding = len(numbers)
+            version_folder = "v" + str(int(numbers) + 1).zfill(padding)
+            os.mkdir(folder_path + version_folder)
+            if version_checker(version_folder):
+                version_folders.append(version_folder)
+
+    else:
+        version_folder = "v001"
+        os.mkdir(folder_path+"v001")
+        if version_checker(version_folder):
+            version_folders.append(version_folder)
+
+    if version_folders:
+        return version_folders
+
+    else:
+        print_error("FAILED TO GET VERSION")
+
+def listdir_with_ignore(path, ignore_list=["", ""], files=False, folders=True):
+    """
+    returns items in directory if they dont contain ignore list
+    :param path:
+    :param ignore_list:
+    :return:
+    """
+    list = []
+    if folders:
+        list = os.listdir(path)
+
+
+    new_list = []
+    if list:
+        for i in list:
+            for ignore in ignore_list:
+                if not ignore in i:
+                    new_list.append(i)
+        return new_list
+    else:
+        print print_warning("NO ITEMS IN DIRECTORY")
+        return None
+
+
+
 def import_latest(folder_path, wild_card):
     """
 
@@ -31,6 +113,7 @@ def import_latest(folder_path, wild_card):
 
     except:
         print "WRONG PATH:  "+folder_path+wild_card
+
 
 def version_up_path(folder_path, wild_card):
 
@@ -87,8 +170,6 @@ def version_by_integer(folder_path, wild_card, integer, endswith=None):
 
         new_num = str(int(numbers) + integer).zfill(padding)
 
-
-
         new_file = split_end.replace(numbers, new_num)
 
         new_path = scene_path + new_file
@@ -98,6 +179,57 @@ def version_by_integer(folder_path, wild_card, integer, endswith=None):
 
     else:
         print_warning("No file found at PATH = {0}           WILDCARD = {1}".format(folder_path, wild_card))
+
+
+def saveJson(my_data,path,version=0):
+    """
+    saves a json, ensures a unique name, returns that name.
+
+    :param my_data:
+    :param path:
+    :param version:
+    :return:
+    """
+    if not ".json" in path:
+        path+=".json"
+    if version:
+        pass
+        # path = uniqueFile(path)
+    print path
+    with open(path, 'w') as outfile:
+        json.dump(my_data, outfile, sort_keys = True, indent = 4)
+    try:
+        os.system("chmod 777 " + path)
+    except:
+        pass
+    return path
+
+
+def loadJson(path):
+    """
+    loads a json, essentially just here to wrap the json.load and open() commands into one.
+
+    :param path:
+    :return:
+    """
+    with open(path) as json_file:
+        return json.load(json_file)
+
+
+def load_plugin(name):
+    """
+    Loads a plugin if not already loaded.
+    :param name: name of pluggin
+    :return:
+    """
+    if not pm.pluginInfo(name,q=1,l=1):
+        try:
+            pm.loadPlugin(name)
+            return True
+        except:
+            print "tried"
+    return True
+
 
 
 def get_history(node=None, historyType=None):
@@ -133,7 +265,117 @@ def get_history(node=None, historyType=None):
                 return historyNodes
 
 
+
+
+def ad_from_SEL(my_SEL, jnts_list, type="joint"):
+    child_SEL = pm.sets(my_SEL, q=True)
+
+    for child in child_SEL:
+        if pm.objectType(child) == type:
+            jnts_list.append(child)
+        else:
+            ad_from_SEL(child, jnts_list)
+
+
+def load_python_part(part_name, *kwargs):
+    ns = "GenericControl"
+    module_path = "pup.assets.parts.{0}.{1}".format(part_name.lower(), ns)
+    components = module_path.split('.')
+    # mod = pup
+    mod = __import__(components[0])
+
+    pass_check = 0
+    for comp in components[1:]:
+        try:
+            mod = getattr(mod, comp)
+            pass_check = 1
+        except:
+            pass_check = 0
+
+    if pass_check:
+        part = mod(part_name, *kwargs)
+        return part
+
+    else:
+        print_error("PART NO WORK")
+
+
+def check_create_dir(path):
+    if not os.path.isdir(path):
+        os.makedirs(path)
+
+
+
+
+
+# ======================== PRINT
+def print_it(string):
+    print "*" * 90
+    print string
+    print "*" * 90
+
+
+def print_error(string):
+    cmds.error(string)
+
+
+def print_warning(string):
+    cmds.warning(string)
+
+
+# ========================= LIST
+# def flatlist(a):
+#     """
+#     Returns a as a flat list.
+#     """
+#     result = []
+#     for b in a:
+#         if hasattr(b, "__iter__") and not isinstance(b, basestring):
+#             if type(b.__iter__) != _instancemethod:
+#                 result.extend(flatlist(b))
+#             else:
+#                 result.append(b)
+#         else:
+#             result.append(b)
+#     return result
+#
+#
+# def aslist(a):
+#     """
+#     ensures that a will be of type list, and be completely flat.
+#     """
+#     if hasattr(a,"__iter__"):
+#         try:
+#             return list(numpy.concatenate(numpy.array(a)).ravel())
+#         except:
+#             return flatlist(a)
+#     else:
+#         return [a]
+
+def remove_items_with(list):
+    "removes items from list if they contain letters from removeIf"
+    newList = []
+    for i in list:
+        if any(not c.isalnum() for c in i):
+            pass
+        else:
+            newList.append(i)
+    return newList
+
+
+# ========================= DICTS
+def merge_two_dicts(x, y):
+    z = x.copy()   # start with x's keys and values
+    z.update(y)    # modifies z with y's keys and values & returns None
+    return z
+
+
 def guide_namespaces():
+    """
+    get all namespaces for guides and return only parts for python builds
+    requires two "_" so its side_name_pythonPart
+    :return:
+    """
     scene_ns = cmds.namespaceInfo(listOnlyNamespaces=True, recurse=True)
 
     # guide_ns_dict = {}
@@ -151,139 +393,3 @@ def guide_namespaces():
             # guide_ns_dict[part] = prefix
 
     return prefixs, parts
-
-
-def load_plugin(name):
-    """
-    Loads a plugin if not already loaded.
-    :param name: name of pluggin
-    :return:
-    """
-    if not pm.pluginInfo(name,q=1,l=1):
-        try:
-            pm.loadPlugin(name)
-            return True
-        except:
-            print "tried"
-    return True
-
-
-def merge_two_dicts(x, y):
-    z = x.copy()   # start with x's keys and values
-    z.update(y)    # modifies z with y's keys and values & returns None
-    return z
-
-
-def ad_from_SEL(my_SEL, jnts_list, type="joint"):
-    child_SEL = pm.sets(my_SEL, q=True)
-
-    for child in child_SEL:
-        if pm.objectType(child) == type:
-            jnts_list.append(child)
-        else:
-            ad_from_SEL(child, jnts_list)
-
-
-def remove_items_with(list):
-    "removes items from list if they contain letters from removeIf"
-    newList = []
-    for i in list:
-        if any(not c.isalnum() for c in i):
-            pass
-        else:
-            newList.append(i)
-    return newList
-
-def print_it(string):
-    print "*"*90
-    print string
-    print "*"*90
-
-def print_error(string):
-    cmds.error(string)
-
-
-def print_warning(string):
-    cmds.warning(string)
-
-
-def saveJson(my_data,path,version=0):
-    """
-    saves a json, ensures a unique name, returns that name.
-
-    :param my_data:
-    :param path:
-    :param version:
-    :return:
-    """
-    if not ".json" in path:
-        path+=".json"
-    if version:
-        path = uniqueFile(path)
-    with open(path, 'w') as outfile:
-        json.dump(my_data, outfile, sort_keys = True, indent = 4)
-    try:
-        os.system("chmod 777 " + path)
-    except:
-        pass
-    return path
-
-def loadJson(path):
-    """
-    loads a json, essentially just here to wrap the json.load and open() commands into one.
-
-    :param path:
-    :return:
-    """
-    with open(path) as json_file:
-        return json.load(json_file)
-
-
-
-
-
-
-def flatlist(a):
-    """
-    Returns a as a flat list.
-    """
-    result = []
-    for b in a:
-        if hasattr(b, "__iter__") and not isinstance(b, basestring):
-            if type(b.__iter__) != _instancemethod:
-                result.extend(flatlist(b))
-            else:
-                result.append(b)
-        else:
-            result.append(b)
-    return result
-
-def aslist(a):
-    """
-    ensures that a will be of type list, and be completely flat.
-    """
-    if hasattr(a,"__iter__"):
-        try:
-            return list(numpy.concatenate(numpy.array(a)).ravel())
-        except:
-            return flatlist(a)
-    else:
-        return [a]
-
-
-
-def check_create_dir(path):
-    if not os.path.isdir(path):
-        os.makedirs(path)
-
-
-
-
-
-
-
-
-
-
-
-
