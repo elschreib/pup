@@ -200,6 +200,8 @@ class GenericWidget(QtWidgets.QWidget):
 
     def open_scene(self, dict=None, step=None, full_path=None):
 
+        print dict["scene"]
+
         if full_path:
             cmds.file(full_path, o=True, f=True, iv=True)
         else:

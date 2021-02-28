@@ -49,7 +49,6 @@ def project_info(project, asset, step=""):
     project_dict["publish"] = projects_folder + step + "/publish/"
     project_dict["data"] = projects_folder + step + "/work/data/"
 
-
     # =========== RIGGING
     if step == "rigging":
         project_dict["skinWeights"] = project_dict["data"] + "skinweights/"

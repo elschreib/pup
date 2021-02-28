@@ -206,11 +206,14 @@ class TextureWidget(generictab.GenericWidget):
         files = ["None"]
         if versions:
             for version in versions:
-                all_files = os.listdir(path + version)
-                for all_file in all_files:
-                    if search_for in all_file:
-                        files.append(str(version + ":" + all_file))
-                        # remove exludes
+                try:
+                    all_files = os.listdir(path + version)
+                    for all_file in all_files:
+                        if search_for in all_file:
+                            files.append(str(version + ":" + all_file))
+                            # remove exludes
+                except:
+                    print "no versions"
         for file_ in files:
             for exclude in excludes:
                 if exclude in file_:

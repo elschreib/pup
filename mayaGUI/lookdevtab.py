@@ -30,8 +30,19 @@ class LookdevWidget(generictab.GenericWidget):
         self.create_layout()
         self.create_connections()
 
+        print self.project_dict["asset"]
+
     def create_widgets(self):
-        pass
+        self.loadGuide_btn = QtWidgets.QPushButton("load")
+
+        transferGuide_layout = QtWidgets.QHBoxLayout()
+        transferGuide_layout.addWidget(self.loadGuide_btn)
+        self.main_layout.addLayout(transferGuide_layout)
+
+
+        self.loadGuide_btn.clicked.connect(self.refresh_widgets)
+
+
 
     def create_layout(self):
         pass
@@ -41,3 +52,4 @@ class LookdevWidget(generictab.GenericWidget):
 
     def refresh_widgets(self):
         self.refresh_generic()
+        print "refresh"
